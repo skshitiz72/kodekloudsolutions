@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  capacity:
+    storage: 250Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp/data
+  storageClassName: slow
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  storageClassName: slow
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 250Mi
+
+kubectl create secret generic mysql-root-pass --from-literal=password=YUIidhb667
+
+kubectl create secret generic mysql-user-pass --from-literal=username=kodekloud_top --from-literal=password=LQfKeWWxWD
+
+kubectl create secret generic mysql-db-url --from-literal=database=kodekloud_db4
